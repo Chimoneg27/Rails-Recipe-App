@@ -1,1 +1,28 @@
-<h1>This is for foods</h1>
+<br/>
+  <%= link_to "Add Food", new_food_path, class: 'btn btn-outline-primary' %>
+<br/>
+
+<table class="table">
+  <% if @foods.present? %>
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Measurement Unit</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @foods.each do |food| %>
+      <tr>
+        <td><%= food.name %></td>
+        <td><%= food.measurement_unit %></td>
+        <td>$<%= food.price %></td>
+        <td><%= button_to "Delete", food, method: :delete, class: 'btn btn-outline-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <% else %>
+    <p>There are no foods available.</p>
+  <% end %>
+</table>
