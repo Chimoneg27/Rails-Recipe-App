@@ -26,7 +26,7 @@ development:
   encoding: unicode
   pool: 5
   username: postgres
-  password: garvin27
+  password: hello
   host: localhost
 
   # The specified database role being used to connect to PostgreSQL.
@@ -63,7 +63,7 @@ test:
   <<: *default
   database: rails_recipe_app_test
   username: postgres
-  password: garvin27
+  password: hello
   host: localhost
   port: 5432
 
