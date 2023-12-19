@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @recipe = Recipe.find(params[:id])
     @recipe_foods = @recipe.recipe_foods
   end
 
@@ -18,6 +19,12 @@ class RecipesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def toggle_public
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(public: !@recipe.public)
+    respond_to(&:js)
   end
 
   private
