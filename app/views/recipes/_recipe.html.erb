@@ -1,7 +1,6 @@
 <div>
   <p>
-     <%= link_to recipe.name, recipe %>
-    <%= recipe.name %>
+    <%= link_to recipe.name, recipe %>
   </p>
   <p>
     <strong>Preparation Time:</strong>
@@ -23,3 +22,5 @@
   <%= link_to "Add ingredient", new_recipe_recipe_food_path(recipe) %>
   <p>
     <%= button_to(recipe.public ? "Make Private" : "Make Public", toggle_public_recipe_path(recipe), method: :put, remote: true) %>
+  </p>
+</div>
