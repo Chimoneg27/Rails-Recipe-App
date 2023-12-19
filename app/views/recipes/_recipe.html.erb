@@ -1,0 +1,26 @@
+<div>
+  <p>
+     <%= link_to recipe.name, recipe %>
+    <%= recipe.name %>
+  </p>
+  <p>
+   
+    <%= recipe.preparation_time %>
+  </p>
+
+  <p>
+   
+    <%= recipe.cooking_time %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <strong>Steps go here...</strong>
+    <%= recipe.description %>
+  </p>
+    <% if recipe.user_id == current_user.id %>
+    <%= link_to "Generate shopping list", new_food_path %>
+  <% end %>
+  <%= link_to "Add ingredient", new_recipe_recipe_food_path(recipe) %>
+  <p>
+    <%= button_to(recipe.public ? "Make Private" : "Make Public", toggle_public_recipe_path(recipe), method: :put, remote: true) %>
