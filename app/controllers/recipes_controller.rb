@@ -1,4 +1,8 @@
 class RecipesController < ApplicationController
+  def public_recipes
+    @public_recipes = Recipe.where(public: true).includes(recipe_foods: :food).order(created_at: :desc)
+  end
+
   def index
     @recipes = Recipe.all
   end
