@@ -1,23 +1,23 @@
-<h1>This is for recipe</h1>
-<div id="recipes">
+<h1 class="display-1 text-center font-weight-bold">
+  Recipes
+</h1>
+
+<div class="container-fluid border p-3 mb-4">
   <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <% if recipe.public == true || recipe.user_id == current_user.id %>
-      <p>
-        <%= link_to recipe.name, recipe %>
-      </p>
-    <% else %>
-      <p>
-        <%= recipe.name %>
-      </p>
-    <% end %>
-
-    <p>
-      <%= recipe.description %>
-    </p>
-
-    <% if recipe.user_id == current_user.id %>
-      <%= button_to "Remove", recipe, method: :delete %>
-    <% end %>
+    <div id="recipes" class="row">
+      <div class="col-md-6">
+        <p>
+          <%= link_to recipe.name, recipe %>
+        </p>
+        <%= button_to "Remove", recipe, method: :delete, class: 'btn btn-outline-danger' %>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <%= recipe.description.split[0...30].join(' ').truncate(150) %>      
+        </p>
+      </div>
+    </div>
   <% end %>
 </div>
+
+<%= link_to "Add another recipe", new_recipe_path, class: 'btn btn-outline-primary mt-4' %>
