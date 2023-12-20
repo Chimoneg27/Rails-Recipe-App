@@ -26,7 +26,7 @@ development:
   encoding: unicode
   pool: 5
   username: postgres
-  password: garvin27
+  password: hello
   host: localhost
   # Nilab your password in the database.yml file
   # password: hello
@@ -64,7 +64,7 @@ test:
   <<: *default
   database: rails_recipe_app_test
   username: postgres
-  password: garvin27
+  password: hello
   # Nilab your password in the database.yml file
   # password: hello
   host: localhost
