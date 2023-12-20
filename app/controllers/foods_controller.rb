@@ -21,6 +21,9 @@ class FoodsController < ApplicationController
 
   def destroy
     @food = Food.find(params[:id])
+
+    @food.recipe_foods.destroy_all if @food.respond_to?(:recipe_foods) && @food.recipe_foods.present?
+
     @food.destroy
     redirect_to foods_path
   end
