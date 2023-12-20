@@ -24,7 +24,7 @@
     <%= button_to(recipe.public ? "Make Private" : "Make Public", toggle_public_recipe_path(recipe), method: :put, remote: true) %>
   </p>
    
-  </hr>
+  <hr/>
 
  <table>
   <tr>
@@ -37,7 +37,7 @@
     <tr>
       <td><%= recipe_food.food.name %></td>
       <td><%= recipe_food.quantity %></td>
-      <td><%= recipe_food.food.price * recipe_food.quantity %></td>
+      <td><%= recipe_food.food.price && recipe_food.quantity ? recipe_food.food.price * recipe_food.quantity : 0.0 %></td>
       <td>
         <%= link_to "Modify", edit_recipe_recipe_food_path(recipe, recipe_food) %>
         <%= button_to "Remove", recipe_recipe_food_path(recipe, recipe_food), method: :delete %>
