@@ -1,7 +1,7 @@
 <br/>
-  <div class="container w-100 d-flex justify-content-end">
-    <%= link_to "Add Food", new_food_path, class: 'btn btn-outline-primary' %>
-  </div>
+<div class="container w-100 d-flex justify-content-end">
+  <%= link_to "Add Food", new_food_path, class: 'btn btn-outline-primary' %>
+</div>
 <br/>
 
 <table class="table">
@@ -17,13 +17,15 @@
   </thead>
   <tbody>
     <% @foods.each do |food| %>
-      <tr>
-        <td><%= food.name %></td>
-        <td><%= food.measurement_unit %></td>
-        <td><%= food.quantity %></td>
-        <td>$<%= food.price %></td>
-        <td><%= button_to "Delete", food, method: :delete, class: 'btn btn-outline-danger' %></td>
-      </tr>
+      <% if food.user == current_user %>
+        <tr>
+          <td><%= food.name %></td>
+          <td><%= food.measurement_unit %></td>
+          <td><%= food.quantity %></td>
+          <td>$<%= food.price %></td>
+          <td><%= button_to "Delete", food, method: :delete, class: 'btn btn-outline-danger' %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
   <% else %>

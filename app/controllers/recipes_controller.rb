@@ -1,24 +1,26 @@
 class RecipesController < ApplicationController
+  load_and_authorize_resource
+  before_action :set_recipe, only: %i[show destroy toggle_public]
+  before_action :authenticate_user!, except: [:public_recipes]
+
   def public_recipes
     @public_recipes = Recipe.where(public: true).includes(recipe_foods: :food).order(created_at: :desc)
   end
 
   def index
-    @recipes = Recipe.all
+    @recipes = current_user.recipes
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
     @recipe_foods = @recipe.recipe_foods
   end
 
   def new
-    @recipe = Recipe.new
+    @recipe = current_user.recipes.build
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
-    @recipe.user = current_user
+    @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       redirect_to @recipe, notice: 'Recipe was created'
     else
@@ -27,19 +29,24 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
-    @recipe.recipe_foods.destroy_all
-    @recipe.destroy
-
-    respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
+    if @recipe.user == current_user
+      @recipe.recipe_foods.destroy_all
+      @recipe.destroy
+      respond_to do |format|
+        format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
+      end
+    else
+      redirect_to recipes_url, alert: 'You are not authorized to delete this recipe.'
     end
   end
 
   def toggle_public
-    @recipe = Recipe.find(params[:id])
-    @recipe.update(public: !@recipe.public)
-    respond_to(&:js)
+    if @recipe.user == current_user
+      @recipe.update(public: !@recipe.public)
+      respond_to(&:js)
+    else
+      redirect_to recipes_url, alert: 'You are not authorized to change this recipe.'
+    end
   end
 
   private
@@ -51,6 +58,6 @@ class RecipesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def recipe_params
-    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public, :user_id)
+    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
   end
 end
