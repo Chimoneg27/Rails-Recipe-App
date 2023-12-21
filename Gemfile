@@ -26,17 +26,15 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'bootsnap', require: false
 
 group :development, :test do
+  gem 'capybara'
   gem 'debug', platforms: %i[mri windows]
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development do
   gem 'web-console'
-end
-
-group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
 end
 
 gem 'rubocop', '>= 1.0', '< 2.0'
