@@ -1,0 +1,40 @@
+<div class="container d-flex flex-column justify-content-center align-items-center">
+  <%= form_with(model: @food) do |form| %>
+    <% if @food.errors.any? %>
+      <div>
+        <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
+        <ul>
+          <% @food.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="d-flex flex-column w-75">
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'w-100 mb-2' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :measurement_unit %>
+        <%= form.text_field :measurement_unit, class: 'w-100 mb-2' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :price %>
+        <%= form.number_field :price, class: 'w-100 mb-2' %>
+      </div>
+
+      <div class='form-group'>
+        <%= form.label :quantity %>
+        <%= form.number_field :quantity, class: 'w-100 mb-2' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit class: 'btn btn-outline-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,25 @@
+<h1 class="display-1 text-center font-weight-bold mb-2">
+  Recipes
+</h1>
+
+<div class="container-fluid border border-dark border-3 p-3 mb-4">
+  <% @recipes.each do |recipe| %>
+  <div class="container mb-3 mt-3 border p-2">
+    <div id="recipes" class="row">
+      <div class="col-md-6">
+        <p>
+          <%= link_to recipe.name, recipe %>
+        </p>
+        <%= button_to "Remove", recipe, method: :delete, class: 'btn btn-outline-danger' %>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <%= recipe.description.split[0...30].join(' ').truncate(150) %>      
+        </p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<%= link_to "Add another recipe", new_recipe_path, class: 'btn btn-outline-primary mt-4' %>
