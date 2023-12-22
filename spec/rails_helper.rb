@@ -11,8 +11,8 @@ require 'factory_bot_rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 Capybara.register_driver :custom_selenium do |app|
   options = Selenium::WebDriver::Firefox::Options.new
-  options.binary = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
-  Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
+  options.binary = 'C:\\Program Files\\Mozilla Firefox\\firefox.exe'
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options:)
 end
 Capybara.default_driver = :custom_selenium
 # Requires supporting ruby files with custom matchers and macros, etc, in

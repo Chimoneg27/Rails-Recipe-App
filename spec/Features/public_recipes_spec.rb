@@ -5,7 +5,7 @@ RSpec.describe 'Public Recipe Show Page' do
     @user = create(:user)
     @user.confirm
     @recipe = create(:recipe, user_id: @user.id)
-    login_as(@user, :scope => :user)
+    login_as(@user, scope: :user)
   end
 
   it 'can see the recipe name' do

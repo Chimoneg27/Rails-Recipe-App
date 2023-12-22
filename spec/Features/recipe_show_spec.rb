@@ -5,7 +5,7 @@ RSpec.describe 'Recipe Show Page' do
     @user = create(:user)
     @user.confirm
     @recipe = create(:recipe, user_id: @user.id)
-    login_as(@user, :scope => :user)
+    login_as(@user, scope: :user)
   end
 
   it 'can see the recipe name' do
@@ -20,6 +20,6 @@ RSpec.describe 'Recipe Show Page' do
 
   it 'can see the make this private button' do
     visit recipe_path(@recipe)
-    expect(page).to have_content("Make Private")
+    expect(page).to have_content('Make Private')
   end
 end
