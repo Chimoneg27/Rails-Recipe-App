@@ -1,20 +1,18 @@
 <div class="container">
-  <h1 class="text-center pb-3"><%= link_to recipe.name, recipe, class: "text-decoration-none color-dark" %></h1>
+  <h1 class="text-center pb-3 text-decoration-none color-dark"><%= recipe.name %></h1>
 
   <div class="d-flex justify-content-between">
     <div class=>
       <p>
-        <strong>Preparation Time:</strong> <%= recipe.preparation_time %>
+        <strong>Preparation Time:</strong> <%= recipe.preparation_time %> hours
       </p>
       <p>
-        <strong>Cooking Time:</strong> <%= recipe.cooking_time %>
+        <strong>Cooking Time:</strong> <%= recipe.cooking_time %> hours
       </p>
       <p>
-        <a href="#recipeSteps" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="recipeSteps">
-           <strong>Steps go here...</strong>
-        </a>
+        <strong>Instructions</strong>
       </p>
-      <div class="collapse" id="recipeSteps">
+      <div id="recipeSteps">
         <%= recipe.description %>
       </div>
       <br>
