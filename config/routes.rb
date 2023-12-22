@@ -13,7 +13,5 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: [:index, :show, :new, :create, :destroy]
-  # root to: 'foods#index'
   get '/public_recipes', to: 'recipes#public_recipes', as: 'public_recipes'
-  # get "up" => "rails/health#show", as: :rails_health_check
 end
