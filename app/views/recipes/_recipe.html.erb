@@ -1,48 +1,61 @@
-<div>
-  <p>
-    <%= link_to recipe.name, recipe %>
-  </p>
-  <p>
-    <strong>Preparation Time:</strong>
-    <%= recipe.preparation_time %>
-  </p>
+<div class="container">
+  <h1 class="text-center pb-3"><%= link_to recipe.name, recipe, class: "text-decoration-none color-dark" %></h1>
 
-  <p>
-    <strong>Cooking Time:</strong>
-    <%= recipe.cooking_time %>
-  </p>
+  <div class="d-flex justify-content-between">
+    <div class=>
+      <p>
+        <strong>Preparation Time:</strong> <%= recipe.preparation_time %>
+      </p>
+      <p>
+        <strong>Cooking Time:</strong> <%= recipe.cooking_time %>
+      </p>
+      <p>
+        <a href="#recipeSteps" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="recipeSteps">
+           <strong>Steps go here...</strong>
+        </a>
+      </p>
+      <div class="collapse" id="recipeSteps">
+        <%= recipe.description %>
+      </div>
+      <br>
+    </div>
 
-  <p>
-    <strong>Steps go here...</strong>
-    <%= recipe.description %>
-  </p>
+    <div class=>
+      <p class="mt-2">
+        <%= button_to(recipe.public ? "Make Private" : "Make Public", toggle_public_recipe_path(recipe), method: :put, remote: true, class: "btn btn-outline-primary btn-sm") %>
+    </div>
+  </div>
+  <div class = "d-flex justify-content-between">
     <% if recipe.user_id == current_user.id %>
-    <%= link_to "Generate shopping list", shopping_list_index_path %>
-  <% end %>
-  <%= link_to "Add ingredient", new_recipe_recipe_food_path(recipe) %>
-  <p>
-    <%= button_to(recipe.public ? "Make Private" : "Make Public", toggle_public_recipe_path(recipe), method: :put, remote: true) %>
-  </p>
-   
+        <%= link_to "Generate shopping list", shopping_list_index_path, class: "btn btn-primary btn-block mr-2" %>
+      <% end %>
+    
+    <%= link_to "Add ingredient", new_recipe_recipe_food_path(recipe), class: "btn btn-success btn-block " %>
+  </div>
+
   <hr/>
 
- <table>
-  <tr>
-    <th>Food</th>
-    <th>Quantity</th>
-    <th>Value</th>
-    <th>Actions</th>
-  </tr>
-  <% @recipe_foods.each do |recipe_food| %>
-    <tr>
-      <td><%= recipe_food.food.name %></td>
-      <td><%= recipe_food.quantity %></td>
-      <td><%= recipe_food.food.price && recipe_food.quantity ? recipe_food.food.price * recipe_food.quantity : 0.0 %></td>
-      <td>
-        <%= link_to "Modify", edit_recipe_recipe_food_path(recipe, recipe_food) %>
-        <%= button_to "Remove", recipe_recipe_food_path(recipe, recipe_food), method: :delete %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>Quantity</th>
+        <th>Value</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recipe_foods.each do |recipe_food| %>
+        <tr>
+          <td><%= recipe_food.food.name %></td>
+          <td><%= recipe_food.quantity %></td>
+          <td><%= recipe_food.food.price && recipe_food.quantity ? recipe_food.food.price * recipe_food.quantity : 0.0 %></td>
+          <td class = "d-flex gap-1">
+            <%= link_to "Modify", edit_recipe_recipe_food_path(recipe, recipe_food), class: "btn btn-warning btn-sm mr-2" %>
+            <%= button_to "Remove", recipe_recipe_food_path(recipe, recipe_food), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

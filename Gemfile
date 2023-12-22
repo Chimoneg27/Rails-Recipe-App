@@ -18,8 +18,10 @@ gem 'stimulus-rails'
 
 gem 'jbuilder'
 
+gem 'bootstrap-sass'
 gem 'cancancan'
 gem 'devise', '~> 4.9', '>= 4.9.3'
+gem 'jquery-rails'
 
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
