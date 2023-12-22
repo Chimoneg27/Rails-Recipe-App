@@ -4,8 +4,8 @@ RSpec.describe 'Food Index Page' do
   before(:each) do
     @user = create(:user)
     @user.confirm
-    @food = create(:food, user_id: @user.id)
     login_as(@user, scope: :user)
+    @food = create(:food, user_id: @user.id)
   end
 
   it 'can see the add food button' do
