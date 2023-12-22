@@ -1,9 +1,10 @@
-<h1 class="display-1 text-center font-weight-bold">
+<h1 class="display-1 text-center font-weight-bold mb-2">
   Recipes
 </h1>
 
-<div class="container-fluid border p-3 mb-4">
+<div class="container-fluid border border-dark border-3 p-3 mb-4">
   <% @recipes.each do |recipe| %>
+  <div class="container mb-3 mt-3 border p-2">
     <div id="recipes" class="row">
       <div class="col-md-6">
         <p>
@@ -17,6 +18,7 @@
         </p>
       </div>
     </div>
+  </div>
   <% end %>
 </div>
 

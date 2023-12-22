@@ -1,15 +1,21 @@
 <section>
-  <h1>Shopping List</h1>
-  <div>
+  <h1 class="text-center width-75">Shopping List</h1>
+  <br/>
+
+
+  <div class='container-fluid d-flex justify-content-between flex-row w-50 mb-4'>    
     <p>Amount of food items to buy: <%= @shopping_list.length %></p>
     <p>Total value of food needed: $<%= @total_cost %></p>
   </div>
-  <table>
-    <tr>
-      <th>Food</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </tr>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
     <tbody>
       <% @shopping_list.each do |item| %>
         <% if item[:user] == current_user && item[:quantity] > 0 %>
