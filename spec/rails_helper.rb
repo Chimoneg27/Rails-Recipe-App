@@ -5,8 +5,16 @@ require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
+require 'capybara/rspec'
+require 'selenium-webdriver'
+require 'factory_bot_rails'
 # Add additional requires below this line. Rails is not loaded until this point!
-
+Capybara.register_driver :custom_selenium do |app|
+  options = Selenium::WebDriver::Firefox::Options.new
+  options.binary = 'C:\\Program Files\\Mozilla Firefox\\firefox.exe'
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options:)
+end
+Capybara.default_driver = :custom_selenium
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -62,4 +70,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end

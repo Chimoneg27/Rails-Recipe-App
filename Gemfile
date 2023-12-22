@@ -28,9 +28,10 @@ gem 'bootsnap', require: false
 group :development, :test do
   gem 'capybara'
   gem 'debug', platforms: %i[mri windows]
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem 'selenium-webdriver', '>= 4.0', '< 4.11'
+  gem 'webdrivers', '~> 5.3', '>= 5.3.1'
 end
 
 group :development do
